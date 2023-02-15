@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <!-- Icon -->
+    <link rel="icon" href="./assets/pokeball-512-256624.png" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.84.0" />
+    <title>Pokemon Starters</title>
+
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.0/examples/album/"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .figure {
+        position: relative;
+      }
+      .figure img.image-hover {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        object-fit: contain;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .figure:hover img.image-hover {
+        opacity: 1;
+      }
+      .figure:hover img.image-main {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <!-- A paragraph explaining what the web page is for -->
+              <p class="text-white">
+                This is a web page that displays the group of 3 Pokemon
+                Legendaries from each generation. The user can select a generation
+                in the navbar and the page will scroll to the corresponding
+                section.
+              </p>
+              <a class="text-white" href="credits.html">View Credit Page</a>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Select a Generation</h4>
+              <ul class="list-unstyled">
+                <li><a href="#gen1" class="text-white">Generation 1</a></li>
+                <li><a href="#gen2" class="text-white">Generation 2</a></li>
+                <li><a href="#gen3" class="text-white">Generation 3</a></li>
+                <li><a href="#gen4" class="text-white">Generation 4</a></li>
+                <li><a href="#gen5" class="text-white">Generation 5</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              aria-hidden="true"
+              class="me-2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+              />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+            <strong>Album</strong>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarHeader"
+            aria-controls="navbarHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h1 style="text-align: center; padding-top: 20px; padding-bottom: 20px">
+          Pokemon Starters by Generation
+        </h1>
+      </section>
+
+      <!-- <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Album example</h1>
+            <p class="lead text-muted">
+              Something short and leading about the collection below—its
+              contents, the creator, etc. Make it short and sweet, but not too
+              short so folks don’t simply skip over it entirely.
+            </p>
+            <p>
+              <a href="#" class="btn btn-primary my-2">Main call to action</a>
+              <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+            </p>
+          </div>
+        </div>
+      </section> -->
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col" id="gen1">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/articuno.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/articuno_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <!-- Paragraph Description of Bulbasaur -->
+                  <p class="card-text">
+                    Bulbasaur is a small, quadruped Pokémon that has blue-green
+                    skin with darker patches. It has red eyes with white pupils
+                    and pointed, ear-like structures on top of its head. It has
+                    short, pointed legs with three sharp claws on the front
+                    feet. A yellow flower is on its back, which is reminiscent
+                    of a seed. Its tail is thin and covered with a spiky
+                    brown-black pattern. It has a bulb on its back that is
+                    filled with a plant-based nutrient. The bulb is drained to
+                    fuel its signature attack, Solar Beam.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Articuno_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 1</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                > -->
+                <!-- <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/zapdos.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/zapdos_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    <!-- Full Paragraph Description of Charmander from Pokedex -->
+                    Charmander is a bipedal, reptilian Pokémon. It is primarily
+                    orange with a cream underside from its chest to its tail. It
+                    has a long snout with a black or dark gray tip, small, round
+                    ears with black interiors, and two pointed teeth on each
+                    side of its lower jaw. It has small, stubby legs and three
+                    sharp claws on the front feet. A flame sac is located at the
+                    base of its spine, which it can use to secrete fire from its
+                    mouth. The flame sac is drained to fuel its signature
+                    attack, Fire Blast.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Charmander -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Zapdos_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 1</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/moltres.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/moltres_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    <!-- Description of the Pokemon Squirtle from the Pokedex, Mention Hydro Pump -->
+                    Squirtle is a small, bipedal, turtle-like Pokémon. It has a
+                    short neck and a small, round head with a cream-colored
+                    face, two small, round ears, and a short, blunt snout. It
+                    has large, dark eyes with a yellow sclera and a dark pupil.
+                    It has a short, stubby tail with a cream underside. It has
+                    three clawed fingers on each hand and three toes on each
+                    foot. It has a brown shell on its back, which it can retract
+                    into. Some moves Squirtle can learn are Water Gun and
+                    Bubble.
+                  </p>
+
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Squirtle -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Moltres_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 1</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col" id="gen2">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/raikou.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/raikou_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    <!-- Description of the Pokemon Chikorita from the Pokedex, Mention Some Moves it Can Learn -->
+                    Chikorita is a grass-type Pokémon introduced in Generation
+                    II. It has a pale green body with large, rounded ears and a
+                    leaf-like curly extension on the top of its head. Chikorita
+                    is known for its calm and peaceful nature, but it is also
+                    fiercely protective of its trainer and will not hesitate to
+                    use its vines to defend them. Its signature move is "Razor
+                    Leaf," which involves firing sharp-edged leaves at its
+                    opponents. In its final evolution, Chikorita becomes the
+                    powerful Meganium, known for its gentle healing abilities
+                    and strength in battle.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Chikorita -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Raikou_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 2</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/entei.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/entei_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Cyndaquil is a quadrupedal Fire-type Pokemon with a fiery
+                    back, tan fur, and black stripes. It is a timid creature
+                    that can unleash a powerful jet of flame from its back when
+                    threatened, making it a formidable opponent in battle. It is
+                    also known for its quick speed and agility, making it a
+                    popular choice for trainers looking for a nimble fighter.
+                    With its adorable appearance and fiery spirit, Cyndaquil is
+                    a favorite among Pokemon fans.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Entei_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 2</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/suicune.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/suicune_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Totodile is a blue and yellow quadruped Pokemon that
+                    resembles a bipedal alligator. It has a large, powerful jaw
+                    filled with sharp teeth, a rounded snout, and a red crest on
+                    its head. Totodile is a water type Pokemon, capable of using
+                    powerful water attacks and has a playful personality, making
+                    it a popular choice for trainers. Despite its small size,
+                    Totodile is known for its strength and determination in
+                    battles, making it a formidable opponent for other Pokemon.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Suicune_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 2</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col" id="gen3">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/regirock.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/regirock_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Treecko is a grass-type Pokémon with a small, lizard-like
+                    appearance. It has a green body with brown markings, a long
+                    tail, and large, round eyes. Treecko is known for its quick
+                    and agile movements, and has the ability to stick to walls
+                    and climb trees with ease. It evolves into Grovyle and then
+                    into Sceptile, and is a popular choice for trainers due to
+                    its versatility in battles.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Regirock_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 3</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                <
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/regice.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/regice_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Torchic is a Fire-type Pokemon species introduced in
+                    Generation III of the Pokemon franchise. It is a small,
+                    orange, bird-like creature with a round head, wide eyes, and
+                    three spiky feathers on its head. It has a fluffy, yellow
+                    belly and two legs with three toes each. Torchic has a flame
+                    on its tail, which it can use to ignite its opponent or warm
+                    itself during cold nights. As it evolves, it transforms into
+                    Combusken and finally into Blaziken, becoming one of the
+                    most powerful Fire-type Pokemon. With its impressive speed,
+                    powerful moves, and high special defense, Torchic is a force
+                    to be reckoned with in battles.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Regice_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 3</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img class="Sirv image-main" data-src="./assets/registeel.png" />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/registeel_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Mudkip is a quadrupedal, amphibious Pokemon that is
+                    primarily blue with a light brown underbelly. It has large,
+                    triangular ears that are often seen standing straight up, a
+                    wide mouth, and a fin on its forehead that resembles a
+                    Mohawk. It has the ability to generate powerful jets of
+                    water from its mouth, making it a formidable opponent in
+                    battles. Its sturdy legs and tough skin make it well-suited
+                    for life in marshy environments, and its ability to sense
+                    vibrations in the ground allows it to detect incoming
+                    threats. Overall, Mudkip is a strong and resilient Pokemon
+                    that is a popular choice for trainers looking for a
+                    versatile and reliable partner in battles.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Registeel_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 3</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col" id="gen4">
+              <div class="card shadow-sm">
+                <!-- <svg
+                    class="bd-placeholder-img card-img-top"
+                    width="100%"
+                    height="225"
+                    xmlns="http://www.w3.org/2000/svg"
+                    role="img"
+                    aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable="false"
+                  >
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" />
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                      Thumbnail
+                    </text>
+                  </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/uxie.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/uxie_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Turtwig is a grass type Pokemon with a round and sturdy body
+                    covered in a brown shell. It has green leaves on its head
+                    that act as a source of photosynthesis, and its arms and
+                    legs are also covered in tough brown shells. Turtwig is a
+                    hardy Pokemon that is able to withstand various attacks with
+                    its shell, and it can also attack by whipping its enemies
+                    with its vines or using powerful grass moves. With its
+                    adorable appearance and tough exterior, Turtwig is a
+                    favorite among Pokemon trainers and fans alike.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Uxie_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 4</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                    class="bd-placeholder-img card-img-top"
+                    width="100%"
+                    height="225"
+                    xmlns="http://www.w3.org/2000/svg"
+                    role="img"
+                    aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable="false"
+                  >
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" />
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                      Thumbnail
+                    </text>
+                  </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/mesprit.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/mesprit_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Chimchar is a Fire type Pokémon that resembles a small,
+                    flame-tailed monkey. It has a dark red body with yellow,
+                    flame-like markings on its cheeks, arms, and legs. Its long,
+                    pointed ears, black fur, and fluffy tail give it a cute and
+                    playful appearance, but don't let that fool you - Chimchar
+                    is a fierce fighter, relying on its speed and agility to
+                    battle. With its powerful Fire type moves and its ability to
+                    Mega Evolve into Mega Infernape, Chimchar is a formidable
+                    force on any team.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Mesprit_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 4</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                    class="bd-placeholder-img card-img-top"
+                    width="100%"
+                    height="225"
+                    xmlns="http://www.w3.org/2000/svg"
+                    role="img"
+                    aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable="false"
+                  >
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" />
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                      Thumbnail
+                    </text>
+                  </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img class="Sirv image-main" data-src="./assets/azelf.png" />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/azelf_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Piplup is a Water-type Pokemon that resembles a penguin. It
+                    has a blue head and torso, white underbelly, and short wings
+                    that it uses to swim through water. Its blue and white head
+                    feathers form a crest that it uses to show its emotions and
+                    it has a small, round beak. Piplup is a proud and determined
+                    Pokemon that often shows arrogance, but it has a strong
+                    sense of loyalty to its trainer. Its signature move is
+                    Bubble Beam, where it shoots a stream of bubbles that can
+                    damage its opponent.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Piplup_(Pok%C3%A9mon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 4</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col" id="gen5">
+              <div class="card shadow-sm">
+                <!-- <svg
+                      class="bd-placeholder-img card-img-top"
+                      width="100%"
+                      height="225"
+                      xmlns="http://www.w3.org/2000/svg"
+                      role="img"
+                      aria-label="Placeholder: Thumbnail"
+                      preserveAspectRatio="xMidYMid slice"
+                      focusable="false"
+                    >
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c" />
+                      <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                        Thumbnail
+                      </text>
+                    </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img class="Sirv image-main" data-src="./assets/cobalion.png" />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/cobalion_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Snivy is a serpentine, grass type Pokemon known for its
+                    slender, vine-like body and gentle disposition. It has
+                    bright green skin with a yellow underbelly and a hood-like
+                    leaf on its head. Snivy is a powerful and graceful Pokemon,
+                    with an ability to photosynthesize and heal itself through
+                    sunlight. Despite its peaceful nature, Snivy is a formidable
+                    opponent in battle, able to use its vines to whip and
+                    strangle its enemies. With its combination of speed and
+                    power, Snivy is a popular choice among Pokemon trainers.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Cobalion_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 5</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                      class="bd-placeholder-img card-img-top"
+                      width="100%"
+                      height="225"
+                      xmlns="http://www.w3.org/2000/svg"
+                      role="img"
+                      aria-label="Placeholder: Thumbnail"
+                      preserveAspectRatio="xMidYMid slice"
+                      focusable="false"
+                    >
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c" />
+                      <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                        Thumbnail
+                      </text>
+                    </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img class="Sirv image-main" data-src="./assets/terrakion.png" />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/terrakion_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Tepig is a fire-type Pokémon with a round and chubby body,
+                    short legs and a long snout. Its body is primarily red in
+                    color with yellow markings on its feet, tail and cheeks.
+                    Tepig has black, curly eyebrows and small, round ears. Its
+                    primary element is fire, which it can unleash from its snout
+                    in the form of flames. Tepig is known for its energetic and
+                    determined personality, making it a popular choice for
+                    trainers looking for a powerful and loyal companion.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Terrakion_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 5</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <!-- <svg
+                      class="bd-placeholder-img card-img-top"
+                      width="100%"
+                      height="225"
+                      xmlns="http://www.w3.org/2000/svg"
+                      role="img"
+                      aria-label="Placeholder: Thumbnail"
+                      preserveAspectRatio="xMidYMid slice"
+                      focusable="false"
+                    >
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c" />
+                      <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                        Thumbnail
+                      </text>
+                    </svg> -->
+
+                <script src="https://scripts.sirv.com/sirvjs/v3/sirv.js"></script>
+                <div class="figure m-4">
+                  <img
+                    class="Sirv image-main"
+                    data-src="./assets/virizion.png"
+                  />
+                  <img
+                    class="Sirv image-hover"
+                    data-src="./assets/verizion_shiny.png"
+                  />
+                </div>
+
+                <div class="card-body">
+                  <p class="card-text">
+                    Oshawott is a water type Pokemon that has a blue, spherical
+                    body with a white belly and two arms with white fur on its
+                    wrists. It has a shell on its stomach that resembles a
+                    scallop shell, which it uses as a weapon in battles.
+                    Oshawott also has a tuft of blue fur on its head, giving it
+                    a distinctive appearance. It is known for its playful and
+                    energetic personality and is often seen carrying its scallop
+                    shell around with it.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <!-- Button that Links to Pokedex Site for Bulbasaur -->
+                      <a
+                        href="https://bulbapedia.bulbagarden.net/wiki/Verizion_(Pokémon)"
+                        target="_blank"
+                        ><button
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                        >
+                          View Bulbapedia
+                        </button></a
+                      >
+                    </div>
+                    <small class="text-muted">Generation 5</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-muted py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">
+          View More Pokemon
+          <a href="https://www.pokemon.com/us/pokedex/">Here</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

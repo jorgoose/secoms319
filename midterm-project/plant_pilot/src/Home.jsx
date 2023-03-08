@@ -54,7 +54,7 @@ function Home() {
           <Humidity />
         </div>
         <div className="..."></div>
-        <div className="col-span-4 m-auto my-8">
+        <div className="col-span-4 m-auto my-8 font-bold">
           A Bunch of Examples of Common Plants Will be Shown Below Here:
         </div>
         <div className="m-auto ml-8 mb-8">

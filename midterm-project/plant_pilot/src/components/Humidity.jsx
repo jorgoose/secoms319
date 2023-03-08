@@ -6,7 +6,7 @@ import LiquidFillGauge from "react-liquid-gauge";
 
 function Humidity() {
   const state = {
-    value: 20,
+    value: 60,
   };
   const startColor = "#D0AE8B"; // cornflowerblue
   const endColor = "#52B1D2"; // crimson

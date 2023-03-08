@@ -95,17 +95,7 @@ function Humidity() {
           margin: "20px auto",
           width: 120,
         }}
-      >
-        <button
-          type="button"
-          className="btn btn-default btn-block"
-          onClick={() => {
-            this.setState({ value: Math.random() * 100 });
-          }}
-        >
-          Refresh
-        </button>
-      </div>
+      ></div>
     </div>
   );
 }

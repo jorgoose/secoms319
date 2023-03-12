@@ -35,13 +35,19 @@ function Plant() {
       <div className="flex justify-center">
         <div className="m-auto mt-8 mb-8">
           <img
-            className="rounded-lg shadow-md mb-3"
-            src="https://tailwindcss.com/img/card-top.jpg"
+            className="rounded-lg shadow-md mb-3 h-50 w-80"
+            src={loading ? <>Loading image name...</> : plant.data.image_url}
           />
-          <h2 className="font-semibold text-center">
-            {loading ? <>Loading common name...</> : plant.data.common_name}
+          <h2 className="font-semibold">
+            <strong>Common Name: {loading ? <>Loading common name...</> : plant.data.common_name}</strong> <br></br> 
+            Scientific Name: {loading ? <>Loading scientific name...</> : plant.data.scientific_name} <br></br>
+            Year Discovered: {loading ? <>Loading year discovered...</> : plant.data.year} <br></br>
+            Observed in: {loading ? <>Loading location...</> : plant.data.observations} <br></br>
+            Minimal Temperature °F: {loading ? <>Loading optimal temperature...</> : plant.data.growth.minimum_temperature.deg_f} <br></br>
+            Minimal Temperature °C: {loading ? <>Loading optimal temperature...</> : plant.data.growth.minimum_temperature.deg_c} <br></br> 
+            Maximal Temperature °F: {loading ? <>Loading optimal temperature...</> : plant.data.growth.maximum_temperature.deg_f} <br></br>
+            Maximal Temperature °C: {loading ? <>Loading optimal temperature...</> : plant.data.growth.maximum_temperature.deg_c} <br></br> 
           </h2>
-          <p></p>
         </div>
       </div>
       <div className="text-center pb-6">...</div>

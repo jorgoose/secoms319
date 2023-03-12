@@ -8,10 +8,10 @@ import { useParams } from "react-router-dom";
 // Access state variables
 import { useState, useEffect } from "react";
 
-// Access plant ID from URL path variable
-const { id } = useParams();
-
 function Plant() {
+  // Access plant ID from URL path variable
+  const { id } = useParams();
+
   return (
     <div className="bg-gray-200 min-h-screen">
       <div className="flex justify-center">

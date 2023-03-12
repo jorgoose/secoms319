@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export default function Plant() {
+function Plant() {
   return (
     <div className="bg-gray-200 min-h-screen">
       <div className="flex justify-center">
@@ -22,3 +22,5 @@ export default function Plant() {
     </div>
   );
 }
+
+export default Plant;

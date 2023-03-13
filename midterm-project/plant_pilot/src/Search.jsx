@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 // Access state variables
 import { useState, useEffect } from "react";
 
+import Navbar from "./components/Navbar/Navbar";
+
 function Search() {
   const { query } = useParams();
 
@@ -35,6 +37,7 @@ function Search() {
 
   return (
     <div>
+      <Navbar />
       <div className="col-span-4 m-auto mt-8">
         <h1 className="text-4xl font-bold text-center">
           Search Results for "{query}"

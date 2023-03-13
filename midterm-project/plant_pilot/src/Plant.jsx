@@ -12,7 +12,7 @@ import { render } from "react-dom";
 function Plant() {
   // Access plant ID from URL path variable
   const { id } = useParams();
-
+ 
   // Fetch plant data from URL before rendering
   const [plant, setPlant] = useState({});
 
@@ -21,6 +21,19 @@ function Plant() {
   async function fetchPlant() {
     const response = await fetch("http://localhost:8000/plant/" + id);
     const data = await response.json();
+
+    if (data.data.growth.minimum_temperature.deg_c === null){
+      data.data.growth.minimum_temperature.deg_c = "No Temperature Data Available";
+    }
+    if (data.data.growth.minimum_temperature.deg_f === null){
+      data.data.growth.minimum_temperature.deg_f = "No Temperature Data Available";
+    }
+    if (data.data.growth.maximum_temperature.deg_c === null){
+      data.data.growth.maximum_temperature.deg_c = "No Temperature Data Available";
+    }
+    if (data.data.growth.maximum_temperature.deg_f === null){
+      data.data.growth.maximum_temperature.deg_f = "No Temperature Data Available";
+    }
     setPlant(data);
     setLoading(false);
   }
@@ -43,10 +56,10 @@ function Plant() {
             Scientific Name: {loading ? <>Loading scientific name...</> : plant.data.scientific_name} <br></br>
             Year Discovered: {loading ? <>Loading year discovered...</> : plant.data.year} <br></br>
             Observed in: {loading ? <>Loading location...</> : plant.data.observations} <br></br>
-            Minimal Temperature °F: {loading ? <>Loading optimal temperature...</> : plant.data.growth.minimum_temperature.deg_f} <br></br>
-            Minimal Temperature °C: {loading ? <>Loading optimal temperature...</> : plant.data.growth.minimum_temperature.deg_c} <br></br> 
-            Maximal Temperature °F: {loading ? <>Loading optimal temperature...</> : plant.data.growth.maximum_temperature.deg_f} <br></br>
-            Maximal Temperature °C: {loading ? <>Loading optimal temperature...</> : plant.data.growth.maximum_temperature.deg_c} <br></br> 
+            Minimum Temperature °F: {loading ? <>Loading optimal temperature...</> : plant.data.growth.minimum_temperature.deg_f} <br></br>
+            Minimum Temperature °C: {loading ? <>Loading optimal temperature...</> : plant.data.growth.minimum_temperature.deg_c} <br></br> 
+            Maximum Temperature °F: {loading ? <>Loading optimal temperature...</> : plant.data.growth.maximum_temperature.deg_f} <br></br>
+            Maximum Temperature °C: {loading ? <>Loading optimal temperature...</> : plant.data.growth.maximum_temperature.deg_c} <br></br> 
           </h2>
         </div>
       </div>

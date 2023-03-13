@@ -47,17 +47,22 @@ function Home() {
     },
   ]);
 
+  // Async function to fetch data from API
+  async function fetchPlant(id) {
+    const response = await fetch("http://localhost:8000/plant/" + id);
+    const data = await response.json();
+
+    return data;
+  }
+
   // Function to set current temperature at load of page
   useEffect(() => {
     // Loop through plants and fetch data from API
     plants.forEach((plant) => {
       // Get method to "https://localhost:8000/plant/" + id
-      fetch("http://localhost:8000/plant/" + plant.id)
-        .then((response) => response.json())
-        .then((data) => {
-          // Add the plant data to the plant object
-          plant.data = data.data;
-        });
+      fetchPlant(plant.id).then((data) => {
+        plant.data = data.data;
+      });
     });
 
     // Loading is done
@@ -105,20 +110,27 @@ function Home() {
         </div>
         {/* For each plant in plants, create a set of elements */}
         {plants.map((plant) => (
-          <div className="m-auto ml-8 mb-8">
+          <div
+            className="m-auto ml-8 mb-8"
+            style={loading ? { display: "none" } : {}}
+          >
             {/* Image wrapped in a div to crop it to a consistent square size, using object-fit */}
             <div className="w-72 h-72 overflow-hidden rounded-lg shadow-md m-auto mb-3">
               {/* Wait until the image_url is not null to render */}
               <img
+                onLoad={() => this.setState({ loaded: true })}
                 src={plant.data.image_url}
-                alt="Plant"
+                alt={plant.data.common_name}
                 className="object-cover w-full h-full"
               />
             </div>
             <h2 className="font-semibold text-center">
-              {plant.data.common_name}
+              <strong>{plant.data.common_name}</strong>
             </h2>
             <h3 className="text-center">{plant.data.scientific_name}</h3>
+            <h3 className="text-center">
+              <strong>Family:</strong> {plant.data.family}
+            </h3>
             <div className="text-center">
               {/* Click the Button for More Data on this Plant */}
               <button

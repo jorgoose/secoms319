@@ -16,9 +16,24 @@ function Credits() {
             Plant data provided by{" "}
             <a href="https://trefle.io/" className="text-blue-600">
               Trefle API
-            </a>
+            </a><br></br>
+            <p>Course Name: SE/ComS319 Construction of User Interfaces, Spring 2023<br></br>
+            Date: March 12th, 2023
+            <div className="flex flex-col w-full h-full mt-6">
+              <p>Team Members:<br></br>
+              Logan Jorgensen<br></br>
+              • <a href="mailto:lmj@iastate.edu">lmj@iastate.edu</a><br></br>
+              David Szczepanik<br></br>
+              • <a href="mailto:djs1@iastate.edu">djs1@iastate.edu</a><br></br>
+              </p>
+            </div>
+            </p>
+
           </p>
-          <p>More stuff...</p>
+
+        <p class="mb-1">
+          Website Created Using Tailwind CSS and ReactJS.
+        </p>
         </div>
       </div>
     </div>

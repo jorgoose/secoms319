@@ -22,6 +22,8 @@ function Plant() {
     const response = await fetch("http://localhost:8000/plant/" + id);
     const data = await response.json();
 
+    console.log(data);
+
     if (data.data.growth.minimum_temperature.deg_c === null){
       data.data.growth.minimum_temperature.deg_c = "No Temperature Data Available";
     }
@@ -33,6 +35,20 @@ function Plant() {
     }
     if (data.data.growth.maximum_temperature.deg_f === null){
       data.data.growth.maximum_temperature.deg_f = "No Temperature Data Available";
+    }
+    if (data.data.growth.atmospheric_humidity === null){
+      data.data.growth.atmospheric_humidity = "No Humidity Data Available";
+    }
+    else
+    {
+      data.data.growth.atmospheric_humidity = data.data.growth.atmospheric_humidity / 10 * 100 + "%";
+    }
+    if (data.data.growth.light === null){
+      data.data.growth.light = "No Light Data Available";
+    }
+    else
+    {
+      data.data.growth.light = data.data.growth.light / 10 * 100 + "%";
     }
     setPlant(data);
     setLoading(false);
@@ -53,6 +69,7 @@ function Plant() {
           />
           <h2 className="font-semibold">
             <strong>Common Name: {loading ? <>Loading common name...</> : plant.data.common_name}</strong> <br></br> 
+            Trefle ID: {loading ? <>Loading Trefle ID...</> : plant.data.id} <br></br>
             Scientific Name: {loading ? <>Loading scientific name...</> : plant.data.scientific_name} <br></br>
             Year Discovered: {loading ? <>Loading year discovered...</> : plant.data.year} <br></br>
             Observed in: {loading ? <>Loading location...</> : plant.data.observations} <br></br>
@@ -60,6 +77,8 @@ function Plant() {
             Minimum Temperature °C: {loading ? <>Loading optimal temperature...</> : plant.data.growth.minimum_temperature.deg_c} <br></br> 
             Maximum Temperature °F: {loading ? <>Loading optimal temperature...</> : plant.data.growth.maximum_temperature.deg_f} <br></br>
             Maximum Temperature °C: {loading ? <>Loading optimal temperature...</> : plant.data.growth.maximum_temperature.deg_c} <br></br> 
+            Atmospheric Humidity: {loading ? <>Loading optimal humidity...</> : plant.data.growth.atmospheric_humidity} <br></br>
+            Optimal Lighting: {loading ? <>Loading optimal lighting...</> : plant.data.growth.light} <br></br>
           </h2>
         </div>
       </div>

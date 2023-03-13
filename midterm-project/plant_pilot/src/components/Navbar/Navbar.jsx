@@ -4,7 +4,7 @@ import "./navbar.css";
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <h1 className="logo">PlantPilot</h1>
+      <a className="logo" href="http://localhost:5173">PlantPilot</a>
     </nav>
   );
 };

@@ -1,6 +1,7 @@
 // Page that displays details for an individual plant type (i.e. Tulips)
 
 import React from "react";
+import Navbar from "./components/Navbar/Navbar";
 
 // Access URL path variable
 import { useParams } from "react-router-dom";
@@ -60,11 +61,13 @@ function Plant() {
   }, []);
 
   return (
-    <div className="bg-gray-200 min-h-screen">
+    <div>
+      <Navbar />
+      <div className="bg-gray-200 min-h-screen">
       <div className="flex justify-center">
         <div className="m-auto mt-8 mb-8">
           <img
-            className="rounded-lg shadow-md mb-3 h-50 w-80"
+            className="rounded-lg shadow-md mb-3 h-25 w-40"
             src={loading ? <>Loading image name...</> : plant.data.image_url}
           />
           <h2 className="font-semibold">
@@ -83,6 +86,7 @@ function Plant() {
         </div>
       </div>
       <div className="text-center pb-6">...</div>
+    </div>
     </div>
   );
 }

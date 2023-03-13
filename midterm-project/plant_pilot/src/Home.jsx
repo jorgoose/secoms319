@@ -29,6 +29,22 @@ function Home() {
       id: 423390,
       data: {},
     },
+    {
+      id: 262063,
+      data: {},
+    },
+    {
+      id: 217655,
+      data: {},
+    },
+    {
+      id: 188347,
+      data: {},
+    },
+    {
+      id: 167924,
+      data: {},
+    },
   ]);
 
   // Function to set current temperature at load of page
@@ -85,15 +101,16 @@ function Home() {
         </div>
         <div className="..."></div>
         <div className="col-span-4 m-auto my-8 font-bold">
-          A Bunch of Examples of Common Plants Will be Shown Below Here:
+          Some Example Plants:
         </div>
         {/* For each plant in plants, create a set of elements */}
         {plants.map((plant) => (
           <div className="m-auto ml-8 mb-8">
             {/* Image wrapped in a div to crop it to a consistent square size, using object-fit */}
             <div className="w-72 h-72 overflow-hidden rounded-lg shadow-md m-auto mb-3">
+              {/* Wait until the image_url is not null to render */}
               <img
-                src={loading ? reactLogo : plant.data.image_url}
+                src={plant.data.image_url}
                 alt="Plant"
                 className="object-cover w-full h-full"
               />
@@ -102,14 +119,23 @@ function Home() {
               {plant.data.common_name}
             </h2>
             <h3 className="text-center">{plant.data.scientific_name}</h3>
-            <p>
-              Plant description. Here will be more details about the specific
-              plant being shown...
-            </p>
+            <div className="text-center">
+              {/* Click the Button for More Data on this Plant */}
+              <button
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full m-auto my-3"
+                onClick={() => {
+                  window.location.href = "/plant/" + plant.id;
+                }}
+              >
+                More Info
+              </button>
+            </div>
           </div>
         ))}
       </div>
-      <div className="text-center pb-6">...</div>
+      <div className="text-center pb-6">
+        Scroll up to the top of the page to try searching for more plants!
+      </div>
     </div>
   );
 }

@@ -7,54 +7,19 @@ bootstrap.href =
   "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
 document.head.appendChild(bootstrap);
 
-const items = [
-  {
-    id: 1,
-    name: "Super Cool Shoes",
-    price: 45,
-    image:
-      "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-2_large.png?format=webp&v=1530129318",
-  },
-  {
-    id: 2,
-    name: "Rolex Watch",
-    price: 9999,
-    image:
-      "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-5_large.png?format=webp&v=1530129458",
-  },
-  {
-    id: 3,
-    name: "Dad Hat",
-    price: 25,
-    image:
-      "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-4_large.png?format=webp&v=1530129360",
-  },
-  {
-    id: 4,
-    name: "Gucci Sunglasses",
-    price: 60,
-    image:
-      "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-3_large.png?format=webp&v=1530129341",
-  },
-  {
-    id: 5,
-    name: "Gamer Lamp",
-    price: 10,
-    image:
-      "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-6_large.png?format=webp&v=1530129477",
-  },
-  {
-    id: 6,
-    name: "Pocket Dimension Backpack",
-    price: 45,
-    image:
-      "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-1_large.png?format=webp&v=1530129297",
-  },
-  // Add more items here
-];
+let items = [];
 
 let cart = {};
 let userDetails = {};
+
+// Fetch data from data.json file
+fetch("data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    items = data;
+    renderBrowseView();
+  })
+  .catch((error) => console.error(error));
 
 function addToCart(itemId) {
   if (!cart[itemId]) {

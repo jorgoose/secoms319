@@ -16,10 +16,10 @@ const App = () => {
   const [updatePriceId, setUpdatePriceId] = useState("");
   const [updatePriceValue, setUpdatePriceValue] = useState("");
 
-  // Fetch all products from the API
+  // Fetch all products from the local backend API
   const fetchProducts = async () => {
     try {
-      const response = await fetch("https://fakestoreapi.com/products");
+      const response = await fetch("https://localhost:3000/api/products"); // Use relative URL
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -31,7 +31,7 @@ const App = () => {
   const addProduct = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://fakestoreapi.com/products", {
+      const response = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,6 +51,7 @@ const App = () => {
           count: "",
         },
       });
+      fetchProducts(); // Fetch the updated list of products
     } catch (error) {
       console.log(error);
     }
@@ -61,8 +62,9 @@ const App = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://fakestoreapi.com/products/${updatePriceId}`,
+        `http://localhost:3000/api/products/${updatePriceId}`,
         {
+          // Use relative URL
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +86,8 @@ const App = () => {
   // Delete a product
   const deleteProduct = async (id) => {
     try {
-      await fetch(`https://fakestoreapi.com/products/${id}`, {
+      await fetch(`http://localhost:3000/api/products/${id}`, {
+        // Use relative URL
         method: "DELETE",
       });
       setProducts(products.filter((product) => product.id !== id));
@@ -216,9 +219,6 @@ const App = () => {
               required
             />
           </div>
-
-          
-
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded"
             type="submit"

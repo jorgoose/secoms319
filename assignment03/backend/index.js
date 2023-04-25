@@ -1,6 +1,14 @@
 const express = require("express");
 
+const cors = require("cors");
+
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 // Mongo
 const { MongoClient } = require("mongodb");
@@ -53,6 +61,9 @@ app.post("/api/products", async (req, res) => {
 
   // Add the product to the database
   const results = await db.collection("fakestore_catalog").insertOne(req.body);
+
+  // Add the product to the database with a dynamic _id
+  // const results = await db.collection("fakestore_catalog").insertOne({
 
   console.log(results);
   res.status(200);

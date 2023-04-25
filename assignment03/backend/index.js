@@ -2,7 +2,14 @@ const express = require("express");
 
 const cors = require("cors");
 
+const bodyParser = require("body-parser");
+
+const { v4: uuidv4 } = require("uuid");
+
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cors({
@@ -59,15 +66,22 @@ app.post("/api/products", async (req, res) => {
   await client.connect();
   console.log("Node connected successfully to POST MongoDB");
 
+  console.log("Request body: ");
+  console.log(req.body);
+
+  // Set newProduct to the request body with an additional unique _id property
+  const newProduct = { ...req.body, _id: uuidv4() };
+
+  console.log("Product to be added to the database: ");
+  console.log(newProduct);
+
   // Add the product to the database
-  const results = await db.collection("fakestore_catalog").insertOne(req.body);
+  const result = await db.collection("fakestore_catalog").insertOne(newProduct);
 
-  // Add the product to the database with a dynamic _id
-  // const results = await db.collection("fakestore_catalog").insertOne({
+  console.log(result);
 
-  console.log(results);
   res.status(200);
-  res.send(results);
+  res.send(result);
 });
 
 // Update a product
@@ -78,7 +92,7 @@ app.put("/api/products/:id", async (req, res) => {
   // Update the product in the database
   const results = await db
     .collection("fakestore_catalog")
-    .updateOne({ id: req.params.id }, { $set: req.body });
+    .updateOne({ _id: req.params.id }, { $set: req.body });
 
   console.log(results);
   res.status(200);
@@ -86,18 +100,24 @@ app.put("/api/products/:id", async (req, res) => {
 });
 
 // Delete a product
+// Delete a product
 app.delete("/api/products/:id", async (req, res) => {
   await client.connect();
   console.log("Node connected successfully to DELETE MongoDB");
 
-  // Delete the product from the database
-  const results = await db
-    .collection("fakestore_catalog")
-    .deleteOne({ id: req.params.id });
+  const id = req.params.id;
+  console.log("Product to be deleted from the database: ");
+  console.log(id);
 
-  console.log(results);
+  // Delete the product from the database
+  const result = await db
+    .collection("fakestore_catalog")
+    .deleteOne({ _id: id });
+
+  console.log(result);
+
   res.status(200);
-  res.send(results);
+  res.send(result);
 });
 
 app.listen(3000, () => {

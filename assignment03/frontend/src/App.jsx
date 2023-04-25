@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 const App = () => {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
+    _id: "",
     title: "",
     price: "",
     description: "",
@@ -19,7 +20,7 @@ const App = () => {
   // Fetch all products from the local backend API
   const fetchProducts = async () => {
     try {
-      const response = await fetch("https://localhost:3000/api/products"); // Use relative URL
+      const response = await fetch("http://localhost:3000/api/products"); // Use relative URL
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -30,17 +31,20 @@ const App = () => {
   // Add a new product
   const addProduct = async (e) => {
     e.preventDefault();
+    console.log(newProduct);
     try {
       const response = await fetch("http://localhost:3000/api/products", {
+        // Use relative URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newProduct),
+        body: JSON.stringify(newProduct), // Include the request body with the new product data
       });
       const data = await response.json();
       setProducts([...products, data]);
       setNewProduct({
+        _id: "",
         title: "",
         price: "",
         description: "",
@@ -51,7 +55,6 @@ const App = () => {
           count: "",
         },
       });
-      fetchProducts(); // Fetch the updated list of products
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +93,7 @@ const App = () => {
         // Use relative URL
         method: "DELETE",
       });
-      setProducts(products.filter((product) => product.id !== id));
+      setProducts(products.filter((product) => product._id !== id));
     } catch (error) {
       console.log(error);
     }
@@ -233,10 +236,30 @@ const App = () => {
         {products.map((product) => (
           <div key={product.id} className="border border-gray-300 p-4 mb-4">
             <h3 className="text-xl font-bold mb-2">{product.title}</h3>
+            <h4 className="text-lg font-bold mb-2">${product.price}</h4>
+            <p className="text-lg mb-2">{product.description}</p>
+            <br />
+            {/* Category with each word in the string capitalized */}
+            <p className="text-lg mb-2">
+              Category:{" "}
+              {product.category.split(" ").map((word) => {
+                return word.charAt(0).toUpperCase() + word.slice(1) + " ";
+              })}
+            </p>
+            <img
+              className="w-64 h-64 object-contain"
+              src={product.image}
+              alt={product.title}
+            />
+            <br />
+            <p className="text-lg mb-2">
+              Rating: {product.rating.rate} ({product.rating.count})
+            </p>
+            <p className="text-lg mb-2">ID: {product._id}</p>
             {/* Display other product information */}
             <button
               className="bg-red-500 text-white px-4 py-2 rounded"
-              onClick={() => deleteProduct(product.id)}
+              onClick={() => deleteProduct(product._id)}
             >
               Delete
             </button>

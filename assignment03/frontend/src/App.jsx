@@ -1,35 +1,288 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState({
+    title: "",
+    price: "",
+    description: "",
+    category: "",
+    image: "",
+    rating: {
+      rate: "",
+      count: "",
+    },
+  });
+  const [updatePriceId, setUpdatePriceId] = useState("");
+  const [updatePriceValue, setUpdatePriceValue] = useState("");
+
+  // Fetch all products from the API
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("https://fakestoreapi.com/products");
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Add a new product
+  const addProduct = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("https://fakestoreapi.com/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
+      });
+      const data = await response.json();
+      setProducts([...products, data]);
+      setNewProduct({
+        title: "",
+        price: "",
+        description: "",
+        category: "",
+        image: "",
+        rating: {
+          rate: "",
+          count: "",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Update the price of a product
+  const updatePrice = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `https://fakestoreapi.com/products/${updatePriceId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ price: updatePriceValue }),
+        }
+      );
+      const data = await response.json();
+      setProducts(
+        products.map((product) => (product.id === data.id ? data : product))
+      );
+      setUpdatePriceId("");
+      setUpdatePriceValue("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Delete a product
+  const deleteProduct = async (id) => {
+    try {
+      await fetch(`https://fakestoreapi.com/products/${id}`, {
+        method: "DELETE",
+      });
+      setProducts(products.filter((product) => product.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="container mx-auto p-4 mt-10">
+      <h1 className="text-2xl font-bold mb-4">Product Catalog</h1>
+      {/* Add Product */}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-2">Add Product</h2>
+        <form onSubmit={addProduct}>
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="title">
+              Title
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="title"
+              value={newProduct.title}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, title: e.target.value })
+              }
+              required
+            />
+          </div>
+          {/* Add other fields (price, description, category, image, rating) similarly */}
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="price">
+              Price
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="price"
+              value={newProduct.price}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, price: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="description">
+              Description
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="description"
+              value={newProduct.description}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, description: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="category">
+              Category
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="category"
+              value={newProduct.category}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, category: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="image">
+              Image
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="image"
+              value={newProduct.image}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, image: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="rate">
+              Rate
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="rate"
+              value={newProduct.rating.rate}
+              onChange={(e) =>
+                setNewProduct({
+                  ...newProduct,
+                  rating: { ...newProduct.rating, rate: e.target.value },
+                })
+              }
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="count">
+              Count
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="count"
+              value={newProduct.rating.count}
+              onChange={(e) =>
+                setNewProduct({
+                  ...newProduct,
+                  rating: { ...newProduct.rating, count: e.target.value },
+                })
+              }
+              required
+            />
+          </div>
 
-export default App
+          
+
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+            type="submit"
+          >
+            Add Product
+          </button>
+        </form>
+      </div>{" "}
+      {/* View Products */}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-2">View Products</h2>
+        {products.map((product) => (
+          <div key={product.id} className="border border-gray-300 p-4 mb-4">
+            <h3 className="text-xl font-bold mb-2">{product.title}</h3>
+            {/* Display other product information */}
+            <button
+              className="bg-red-500 text-white px-4 py-2 rounded"
+              onClick={() => deleteProduct(product.id)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
+      {/* Update Price */}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-2">Update Price</h2>
+        <form onSubmit={updatePrice}>
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="updatePriceId">
+              Product ID
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="updatePriceId"
+              value={updatePriceId}
+              onChange={(e) => setUpdatePriceId(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1" htmlFor="updatePriceValue">
+              New Price
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="updatePriceValue"
+              value={updatePriceValue}
+              onChange={(e) => setUpdatePriceValue(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+            type="submit"
+          >
+            Update Price
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default App;

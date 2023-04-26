@@ -4,6 +4,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
     _id: "",
+    id: "",
     title: "",
     price: "",
     description: "",
@@ -45,6 +46,7 @@ const App = () => {
       setProducts([...products, data]);
       setNewProduct({
         _id: "",
+        id: "",
         title: "",
         price: "",
         description: "",
@@ -127,6 +129,21 @@ const App = () => {
           </div>
           {/* Add other fields (price, description, category, image, rating) similarly */}
           <div className="mb-4">
+            <label className="block mb-1" htmlFor="id">
+              ID
+            </label>
+            <input
+              className="border border-gray-300 px-2 py-1 w-64"
+              type="text"
+              id="id"
+              value={newProduct.id}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, id: parseInt(e.target.value) })
+              }
+              required
+            />
+          </div>
+          <div className="mb-4">
             <label className="block mb-1" htmlFor="price">
               Price
             </label>
@@ -198,7 +215,7 @@ const App = () => {
               onChange={(e) =>
                 setNewProduct({
                   ...newProduct,
-                  rating: { ...newProduct.rating, rate: e.target.value },
+                  rating: { ...newProduct.rating, rate: parseInt(e.target.value) },
                 })
               }
               required
@@ -216,7 +233,7 @@ const App = () => {
               onChange={(e) =>
                 setNewProduct({
                   ...newProduct,
-                  rating: { ...newProduct.rating, count: e.target.value },
+                  rating: { ...newProduct.rating, count: parseInt(e.target.value) },
                 })
               }
               required

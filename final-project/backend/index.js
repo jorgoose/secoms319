@@ -7,6 +7,13 @@ const cors = require("cors");
 // Axios is a library for making HTTP requests
 const axios = require("axios");
 
+// Mongo
+const { MongoClient } = require("mongodb");
+const url = "mongodb://127.0.0.1:27017";
+const dbName = "final_project";
+const client = new MongoClient(url);
+const db = client.db(dbName);
+
 const app = express();
 
 // Enable CORS
@@ -14,6 +21,20 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World");
+});
+
+// Define the endpoint to retrieve all games
+app.get("/api/games", async (req, res) => {
+  await client.connect();
+  console.log("Node connected successfully to GET MongoDB");
+
+  const query = {};
+
+  const results = await db.collection("games").find(query).limit(100).toArray();
+
+  console.log(results);
+  res.status(200);
+  res.send(results);
 });
 
 // Define the endpoint to retrieve the featured games

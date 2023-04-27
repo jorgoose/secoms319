@@ -4,15 +4,15 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
     _id: "",
-    id: "",
+    id: 0,
     title: "",
-    price: "",
+    price: 0.0,
     description: "",
     category: "",
     image: "",
     rating: {
-      rate: "",
-      count: "",
+      rate: 0,
+      count: 0,
     },
   });
   const [updatePriceId, setUpdatePriceId] = useState("");
@@ -46,15 +46,15 @@ const App = () => {
       setProducts([...products, data]);
       setNewProduct({
         _id: "",
-        id: "",
+        id: 0,
         title: "",
-        price: "",
+        price: 0.0,
         description: "",
         category: "",
         image: "",
         rating: {
-          rate: "",
-          count: "",
+          rate: 0,
+          count: 0,
         },
       });
     } catch (error) {
@@ -109,7 +109,7 @@ const App = () => {
     <div className="container mx-auto p-4 mt-10">
       <h1 className="text-2xl font-bold mb-4">Product Catalog</h1>
       {/* Add Product */}
-      <div className="mb-8">
+      <div className="mb-8 border border-gray-300 p-4 mb-4">
         <h2 className="text-lg font-bold mb-2">Add Product</h2>
         <form onSubmit={addProduct}>
           <div className="mb-4">
@@ -153,7 +153,7 @@ const App = () => {
               id="price"
               value={newProduct.price}
               onChange={(e) =>
-                setNewProduct({ ...newProduct, price: e.target.value })
+                setNewProduct({ ...newProduct, price: parseFloat(e.target.value) })
               }
               required
             />
@@ -284,7 +284,7 @@ const App = () => {
         ))}
       </div>
       {/* Update Price */}
-      <div className="mb-8">
+      <div className="mb-8 border border-gray-300 p-4 mb-4">
         <h2 className="text-lg font-bold mb-2">Update Price</h2>
         <form onSubmit={updatePrice}>
           <div className="mb-4">

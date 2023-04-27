@@ -38,12 +38,22 @@ app.get("/api/games", async (req, res) => {
   const results = await db
     .collection("games")
     .find(query, options)
-    .limit(300)
+    .limit(100)
     .toArray();
 
-  console.log(results);
+  // Only games without duplicate Name attribute
+  const uniqueResults = [];
+  const map = new Map();
+  for (const item of results) {
+    if (!map.has(item.Name)) {
+      map.set(item.Name, true);
+      uniqueResults.push(item);
+    }
+  }
+
+  console.log(uniqueResults);
   res.status(200);
-  res.send(results);
+  res.send(uniqueResults);
 });
 
 // Define the endpoint to retrieve the featured games

@@ -32,6 +32,7 @@ const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartItemCount, setCartItemCount] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     axios
@@ -41,7 +42,10 @@ const App: React.FC = () => {
 
     axios
       .get("http://localhost:3000/api/games")
-      .then((response) => setAllGames(response.data))
+      .then((response) => {
+        setAllGames(response.data);
+        setIsLoading(false); // <-- Set isLoading to false
+      })
       .catch((error) => console.error(error));
 
     console.log("allGames: ", allGames);
@@ -124,6 +128,17 @@ const App: React.FC = () => {
       </header>
       {/* Main Content */}
       <main className="flex-1 px-8 py-4">
+        {/* Loading spinner */}
+        {isLoading && (
+          <div className="flex flex-col items-center mt-32">
+            <div className="spinner"></div>
+            <p className="mt-2 text-center">Loading games...</p>
+            <p className="mt-1 text-gray-400 text-sm text-center mb-32">
+              And no, you don't need to button-mash to progress.
+            </p>
+          </div>
+        )}
+
         <div className="h-70vh overflow-y-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {featuredGames.map((game) => {

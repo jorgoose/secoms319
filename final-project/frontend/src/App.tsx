@@ -21,10 +21,58 @@ interface Game {
   controller_support?: string;
 }
 
-interface CartItem {
+// interface CartItem {
+//   game: Game;
+//   quantity: number;
+// }
+
+interface CartItemProps {
   game: Game;
-  quantity: number;
 }
+
+const CartItem: React.FC<CartItemProps> = ({ game }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleAddToCart = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleRemoveFromCart = () => {
+    setQuantity(quantity - 1);
+  };
+
+  const isInCart = () => {
+    return quantity > 0;
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-lg">
+      <img
+        src={game["Header image"]}
+        alt={game["Name"]}
+        className="rounded-t-lg"
+      />
+      <div className="p-4 flex flex-col justify-between">
+        <div>
+          <h2 className="text-lg font-bold">{game["Name"]}</h2>
+          <p className="text-sm text-gray-600">
+            {game["Price"] === 0 ? "FREE" : "$" + game["Price"]}
+          </p>
+        </div>
+        <button
+          className={`mt-4 mb-2 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 ${
+            isInCart()
+              ? "bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
+              : "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-600"
+          }`}
+          onClick={isInCart() ? handleRemoveFromCart : handleAddToCart}
+        >
+          {isInCart() ? "Remove from Cart" : "Add to Cart"}
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const App: React.FC = () => {
   const [featuredGames, setFeaturedGames] = useState<Game[]>([]);
@@ -52,15 +100,16 @@ const App: React.FC = () => {
   }, []);
 
   const handleAddToCart = (game: Game) => {
-    const existingCartItem = cart.find((item) => item.game.id === game.id);
-    if (existingCartItem) {
-      const updatedCart = cart.map((item) => {
-        if (item.game.id === game.id) {
-          return { ...item, quantity: item.quantity + 1 };
-        } else {
-          return item;
-        }
-      });
+    const existingCartItemIndex = cart.findIndex(
+      (item) => item.game.id === game.id
+    );
+    if (existingCartItemIndex !== -1) {
+      const updatedCartItem = {
+        ...cart[existingCartItemIndex],
+        quantity: cart[existingCartItemIndex].quantity + 1,
+      };
+      const updatedCart = [...cart];
+      updatedCart[existingCartItemIndex] = updatedCartItem;
       setCart(updatedCart);
     } else {
       const newCartItem = { game: game, quantity: 1 };
@@ -70,15 +119,19 @@ const App: React.FC = () => {
   };
 
   const handleRemoveFromCart = (game: Game) => {
-    const existingCartItem = cart.find((item) => item.game.id === game.id);
-    if (existingCartItem && existingCartItem.quantity > 1) {
-      const updatedCart = cart.map((item) => {
-        if (item.game.id === game.id) {
-          return { ...item, quantity: item.quantity - 1 };
-        } else {
-          return item;
-        }
-      });
+    const existingCartItemIndex = cart.findIndex(
+      (item) => item.game.id === game.id
+    );
+    if (
+      existingCartItemIndex !== -1 &&
+      cart[existingCartItemIndex].quantity > 1
+    ) {
+      const updatedCartItem = {
+        ...cart[existingCartItemIndex],
+        quantity: cart[existingCartItemIndex].quantity - 1,
+      };
+      const updatedCart = [...cart];
+      updatedCart[existingCartItemIndex] = updatedCartItem;
       setCart(updatedCart);
     } else {
       const updatedCart = cart.filter((item) => item.game.id !== game.id);
@@ -196,37 +249,7 @@ const App: React.FC = () => {
                 return null;
               }
 
-              return (
-                <div key={game.id} className="bg-white rounded-lg shadow-lg">
-                  <img
-                    src={game["Header image"]}
-                    alt={game["Name"]}
-                    className="rounded-t-lg"
-                  />
-                  <div className="p-4 flex flex-col justify-between">
-                    <div>
-                      <h2 className="text-lg font-bold">{game["Name"]}</h2>
-                      <p className="text-sm text-gray-600">
-                        {game["Price"] === 0 ? "FREE" : "$" + game["Price"]}
-                      </p>
-                    </div>
-                    <button
-                      className={`mt-4 mb-2 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 ${
-                        cartItem
-                          ? "bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
-                          : "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-600"
-                      }`}
-                      onClick={() =>
-                        cartItem
-                          ? handleRemoveFromCart(game)
-                          : handleAddToCart(game)
-                      }
-                    >
-                      {cartItem ? "Remove from Cart" : "Add to Cart"}
-                    </button>
-                  </div>
-                </div>
-              );
+              return <CartItem key={game.id} game={game} />;
             })}
           </div>
         </div>

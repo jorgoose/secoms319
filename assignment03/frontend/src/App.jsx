@@ -244,7 +244,7 @@ const App = () => {
       <div className="mb-8">
         <h2 className="text-lg font-bold mb-2">View Products</h2>
         {products.map((product) => (
-          <div key={product.id} className="border border-gray-300 p-4 mb-4">
+          <div key={product._id} className="border border-gray-300 p-4 mb-4">
             <h3 className="text-xl font-bold mb-2">{product.title}</h3>
             <h4 className="text-lg font-bold mb-2">${product.price}</h4>
             <p className="text-lg mb-2">{product.description}</p>

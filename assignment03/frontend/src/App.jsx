@@ -6,7 +6,7 @@ const App = () => {
     _id: "",
     id: 0,
     title: "",
-    price: 0.0,
+    price: 0,
     description: "",
     category: "",
     image: "",
@@ -29,34 +29,33 @@ const App = () => {
     }
   };
 
-  // Add a new product
+  // Add a product
   const addProduct = async (e) => {
     e.preventDefault();
-    console.log(newProduct);
     try {
       const response = await fetch("http://localhost:3000/api/products", {
-        // Use relative URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newProduct), // Include the request body with the new product data
+        body: JSON.stringify(newProduct),
       });
       const data = await response.json();
       setProducts([...products, data]);
-      setNewProduct({
-        _id: "",
-        id: 0,
-        title: "",
-        price: 0.0,
-        description: "",
-        category: "",
-        image: "",
-        rating: {
-          rate: 0,
-          count: 0,
-        },
-      });
+      // setNewProduct({
+      //   _id: "",
+      //   id: 0,
+      //   title: "",
+      //   price: 0,
+      //   description: "",
+      //   category: "",
+      //   image: "",
+      //   rating: {
+      //     rate: 0,
+      //     count: 0,
+      //   },
+      // });
+      fetchProducts();
     } catch (error) {
       console.log(error);
     }
@@ -129,21 +128,6 @@ const App = () => {
           </div>
           {/* Add other fields (price, description, category, image, rating) similarly */}
           <div className="mb-4">
-            <label className="block mb-1" htmlFor="id">
-              ID
-            </label>
-            <input
-              className="border border-gray-300 px-2 py-1 w-64"
-              type="text"
-              id="id"
-              value={newProduct.id}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, id: parseInt(e.target.value) })
-              }
-              required
-            />
-          </div>
-          <div className="mb-4">
             <label className="block mb-1" htmlFor="price">
               Price
             </label>
@@ -153,7 +137,10 @@ const App = () => {
               id="price"
               value={newProduct.price}
               onChange={(e) =>
-                setNewProduct({ ...newProduct, price: parseFloat(e.target.value) })
+                setNewProduct({
+                  ...newProduct,
+                  price: parseFloat(e.target.value),
+                })
               }
               required
             />
@@ -215,7 +202,10 @@ const App = () => {
               onChange={(e) =>
                 setNewProduct({
                   ...newProduct,
-                  rating: { ...newProduct.rating, rate: parseInt(e.target.value) },
+                  rating: {
+                    ...newProduct.rating,
+                    rate: parseInt(e.target.value),
+                  },
                 })
               }
               required
@@ -233,7 +223,10 @@ const App = () => {
               onChange={(e) =>
                 setNewProduct({
                   ...newProduct,
-                  rating: { ...newProduct.rating, count: parseInt(e.target.value) },
+                  rating: {
+                    ...newProduct.rating,
+                    count: parseInt(e.target.value),
+                  },
                 })
               }
               required
@@ -259,10 +252,12 @@ const App = () => {
             {/* Category with each word in the string capitalized */}
             <p className="text-lg mb-2">
               Category:{" "}
-              {product.category.split(" ").map((word) => {
-                return word.charAt(0).toUpperCase() + word.slice(1) + " ";
-              })}
+              {product.category &&
+                product.category.split(" ").map((word) => {
+                  return word.charAt(0).toUpperCase() + word.slice(1) + " ";
+                })}
             </p>
+
             <img
               className="w-64 h-64 object-contain"
               src={product.image}
@@ -270,7 +265,12 @@ const App = () => {
             />
             <br />
             <p className="text-lg mb-2">
-              Rating: {product.rating.rate} ({product.rating.count})
+              Rating:{" "}
+              {product.rating &&
+                product.rating.rate &&
+                product.rating.count &&
+                product.rating.rate}{" "}
+              ({product.rating && product.rating.count && product.rating.count})
             </p>
             <p className="text-lg mb-2">ID: {product._id}</p>
             {/* Display other product information */}

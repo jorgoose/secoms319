@@ -38,7 +38,7 @@ app.get("/api/games", async (req, res) => {
   const results = await db
     .collection("games")
     .find(query, options)
-    .limit(300)
+    .limit(1000)
     .toArray();
 
   // Only games without duplicate Name attribute

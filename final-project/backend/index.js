@@ -28,9 +28,18 @@ app.get("/api/games", async (req, res) => {
   await client.connect();
   console.log("Node connected successfully to GET MongoDB");
 
+  // Query for the games sorted by the "Positive" attribute
   const query = {};
 
-  const results = await db.collection("games").find(query).limit(100).toArray();
+  const options = {
+    sort: { Positive: -1 },
+  };
+
+  const results = await db
+    .collection("games")
+    .find(query, options)
+    .limit(100)
+    .toArray();
 
   console.log(results);
   res.status(200);

@@ -99,7 +99,7 @@ const App: React.FC = () => {
     <div className="flex flex-col h-screen">
       {/* Header */}
       <header className="bg-gray-900 text-white py-4 px-8 flex justify-between items-center">
-        <h1 className="font-bold text-lg">Game Store</h1>
+        <h1 className="font-bold text-lg">The Game Vault</h1>
         <div className="flex items-center space-x-4">
           <input
             type="text"

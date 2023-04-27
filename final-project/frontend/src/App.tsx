@@ -182,53 +182,55 @@ const App: React.FC = () => {
         </div>
       </main>
       {/* Full Game List */}
-      <div className="flex flex-col px-8 py-4 mt-8">
-        <h2 className="text-lg font-bold mb-4">All Games</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {filteredGames.map((game) => {
-            const cartItem = cart.find((item) => item.game.id === game.id);
-            const isInFeaturedGames = featuredGames.some(
-              (featuredGame) => featuredGame.id === game.id
-            );
+      {allGames.length > 0 && (
+        <div className="flex flex-col px-8 py-4 mt-8">
+          <h2 className="text-lg font-bold mb-4">All Games</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {filteredGames.map((game) => {
+              const cartItem = cart.find((item) => item.game.id === game.id);
+              const isInFeaturedGames = featuredGames.some(
+                (featuredGame) => featuredGame.id === game.id
+              );
 
-            if (isInFeaturedGames) {
-              return null;
-            }
+              if (isInFeaturedGames) {
+                return null;
+              }
 
-            return (
-              <div key={game.id} className="bg-white rounded-lg shadow-lg">
-                <img
-                  src={game["Header image"]}
-                  alt={game["Name"]}
-                  className="rounded-t-lg"
-                />
-                <div className="p-4 flex flex-col justify-between">
-                  <div>
-                    <h2 className="text-lg font-bold">{game["Name"]}</h2>
-                    <p className="text-sm text-gray-600">
-                      {game["Price"] === 0 ? "FREE" : "$" + game["Price"]}
-                    </p>
+              return (
+                <div key={game.id} className="bg-white rounded-lg shadow-lg">
+                  <img
+                    src={game["Header image"]}
+                    alt={game["Name"]}
+                    className="rounded-t-lg"
+                  />
+                  <div className="p-4 flex flex-col justify-between">
+                    <div>
+                      <h2 className="text-lg font-bold">{game["Name"]}</h2>
+                      <p className="text-sm text-gray-600">
+                        {game["Price"] === 0 ? "FREE" : "$" + game["Price"]}
+                      </p>
+                    </div>
+                    <button
+                      className={`mt-4 mb-2 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 ${
+                        cartItem
+                          ? "bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
+                          : "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-600"
+                      }`}
+                      onClick={() =>
+                        cartItem
+                          ? handleRemoveFromCart(game)
+                          : handleAddToCart(game)
+                      }
+                    >
+                      {cartItem ? "Remove from Cart" : "Add to Cart"}
+                    </button>
                   </div>
-                  <button
-                    className={`mt-4 mb-2 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 ${
-                      cartItem
-                        ? "bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
-                        : "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-600"
-                    }`}
-                    onClick={() =>
-                      cartItem
-                        ? handleRemoveFromCart(game)
-                        : handleAddToCart(game)
-                    }
-                  >
-                    {cartItem ? "Remove from Cart" : "Add to Cart"}
-                  </button>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-500 py-4 px-8 text-center">
         <p>

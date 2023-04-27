@@ -216,7 +216,13 @@ const App: React.FC = () => {
       </div>
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-500 py-4 px-8 text-center">
-        <p>This website is for demonstrational purposes only. To purchase </p>
+        <p>
+          This website is for demonstrational purposes only. To purchase these
+          games, please navigate to the official Steam store at &nbsp;
+          <a className="text-teal-500" href="https://store.steampowered.com">
+            https://store.steampowered.com
+          </a>
+        </p>
       </footer>{" "}
     </div>
   );

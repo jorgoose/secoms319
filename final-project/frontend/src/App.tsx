@@ -140,7 +140,9 @@ const App: React.FC = () => {
                     <div>
                       <h2 className="text-lg font-bold">{game["name"]}</h2>
                       <p className="text-sm text-gray-600">
-                        {game["currency"]} {game["final_price"] / 100}
+                        {game["final_price"] === 0
+                          ? "FREE"
+                          : "$" + game["final_price"] / 100}
                       </p>
                     </div>
                     <button
@@ -188,7 +190,9 @@ const App: React.FC = () => {
                 <div className="p-4 flex flex-col justify-between">
                   <div>
                     <h2 className="text-lg font-bold">{game["Name"]}</h2>
-                    <p className="text-sm text-gray-600">${game["Price"]}</p>
+                    <p className="text-sm text-gray-600">
+                      {game["Price"] === 0 ? "FREE" : "$" + game["Price"]}
+                    </p>
                   </div>
                   <button
                     className={`mt-4 mb-2 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 ${

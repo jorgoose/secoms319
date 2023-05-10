@@ -7,8 +7,12 @@ const cors = require("cors");
 // Axios is a library for making HTTP requests
 const axios = require("axios");
 
+// UUID
+const { v4: uuidv4 } = require("uuid");
+
 // Mongo
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
+const ObjectID = require("mongodb").ObjectID;
 const url = "mongodb://127.0.0.1:27017";
 const dbName = "final_project";
 const client = new MongoClient(url);
@@ -98,6 +102,21 @@ app.get("/api/games/paginated", async (req, res) => {
   }
 });
 
+app.post("/api/games", (req, res) => {
+  const newGame = {
+    _id: uuid.v4(), // Generate a new unique ID for the game
+    AppID: req.body.AppID,
+    Name: req.body.Name,
+    Price: req.body.Price,
+  };
+
+  db.collection("games").insertOne(newGame, (err, result) => {
+    if (err) throw err;
+    console.log("Game added to database");
+    res.send(result.ops[0]);
+  });
+});
+
 // Define the endpoint to retrieve the featured games
 app.get("/api/featured", async (req, res) => {
   try {
@@ -115,6 +134,31 @@ app.get("/api/featured", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Failed to retrieve featured games data" });
   }
+});
+
+app.delete("/api/games/:id", (req, res) => {
+  const gameId = req.params.id;
+  console.log("Finding and deleting game with id: " + gameId);
+  db.collection("games").deleteOne({ _id: gameId }, (err, result) => {
+    if (err) throw err;
+    console.log("Game deleted from database");
+    res.send(result);
+  });
+});
+
+// This endpoint will increment the "Positive" attribute of a game by 1
+app.put("/api/games/:id", (req, res) => {
+  const gameId = req.params.id;
+  console.log("Finding and updating game with id: " + gameId);
+  db.collection("games").updateOne(
+    { _id: gameId },
+    { $inc: { Positive: 1 } },
+    (err, result) => {
+      if (err) throw err;
+      console.log("Game updated in database");
+      res.send(result);
+    }
+  );
 });
 
 // Start the server

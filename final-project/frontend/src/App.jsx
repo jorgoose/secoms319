@@ -20,8 +20,30 @@ const CartItem = ({ game }) => {
     return quantity > 0;
   };
 
+  const handleRemoveGame = (id) => {
+    axios
+      .delete(`http://localhost:3000/api/games/${id}`)
+      .then(() => {
+        // Refresh the page
+        console.log("Game removed from database");
+        window.location.reload();
+      })
+      .catch((error) => console.error(error));
+  };
+
   CartItem.propTypes = {
     game: PropTypes.object.isRequired,
+  };
+
+  const handleUpdateGame = (id, updatedGame) => {
+    axios
+      .put(`http://localhost:3000/api/games/${id}`, updatedGame)
+      .then(() => {
+        // Refresh the page
+        console.log("Game updated in database");
+        window.location.reload();
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -61,9 +83,69 @@ const CartItem = ({ game }) => {
         >
           {isInCart() ? "Remove from Cart" : "Add to Cart"}
         </button>
+        <button
+          className="mt-4 mb-2 py-2 px-4 rounded-lg bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+          onClick={() => handleRemoveGame(game._id)}
+        >
+          Remove Game from Database
+        </button>
+        <button
+          className="mt-4 mb-2 py-2 px-4 rounded-lg bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600"
+          onClick={() => handleUpdateGame(game._id)}
+        >
+          Upvote this Game
+        </button>
       </div>
     </div>
   );
+};
+
+const AddGameForm = ({ onSubmit }) => {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit({ name, price, image });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          value={price}
+          onChange={(event) => setPrice(event.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="image">Image URL:</label>
+        <input
+          type="text"
+          id="image"
+          value={image}
+          onChange={(event) => setImage(event.target.value)}
+        />
+      </div>
+      <button type="submit">Add Game</button>
+    </form>
+  );
+};
+
+AddGameForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 
 const App = () => {
@@ -142,6 +224,27 @@ const App = () => {
     (game) =>
       game.Name && game.Name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const [newGame, setNewGame] = useState({
+    name: "",
+    price: 0,
+    description: "",
+    imageUrl: "",
+  });
+
+  const handleAddGame = () => {
+    axios
+      .post("http://localhost:3000/api/games", {
+        AppID: newGame.appid,
+        Name: newGame.name,
+        Price: newGame.price,
+      })
+      .then((response) => {
+        setAllGames([...allGames, response.data]);
+        setNewGame({ appid: "", name: "", price: "" });
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div className="flex flex-col h-screen">
@@ -223,6 +326,67 @@ const App = () => {
             })}
           </div>
         </div>
+        {/* Add Game */}
+        <div className="flex flex-col px-8 py-4">
+          <h2 className="text-lg font-bold mb-4">Add Game</h2>
+          <form onSubmit={handleAddGame}>
+            <div className="mb-4">
+              <label htmlFor="name" className="block font-bold mb-2">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                className="border border-gray-400 py-2 px-3 rounded-lg w-full"
+                value={newGame.name}
+                onChange={(e) =>
+                  setNewGame({ ...newGame, name: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="price" className="block font-bold mb-2">
+                Price
+              </label>
+              <input
+                type="number"
+                name="price"
+                id="price"
+                className="border border-gray-400 py-2 px-3 rounded-lg w-full"
+                value={newGame.price}
+                onChange={(e) =>
+                  setNewGame({ ...newGame, price: parseFloat(e.target.value) })
+                }
+                min="0"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="image" className="block font-bold mb-2">
+                Image URL
+              </label>
+              <input
+                type="url"
+                name="image"
+                id="image"
+                className="border border-gray-400 py-2 px-3 rounded-lg w-full"
+                value={newGame.image}
+                onChange={(e) =>
+                  setNewGame({ ...newGame, image: e.target.value })
+                }
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            >
+              Add Game
+            </button>
+          </form>
+        </div>
       </main>
       {/* Full Game List */}
       {allGames.length > 0 && (
@@ -236,7 +400,7 @@ const App = () => {
               if (isInFeaturedGames) {
                 return null;
               }
-              return <CartItem key={game.id} game={game} />;
+              return <CartItem key={game._id} game={game} />;
             })}
           </div>
         </div>

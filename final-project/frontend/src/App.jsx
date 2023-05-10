@@ -1,36 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
+// Import PropTypes
+import PropTypes from "prop-types";
+
 import axios from "axios";
 
-interface Game {
-  id: number;
-  type: number;
-  name: string;
-  discounted: boolean;
-  discount_percent: number;
-  original_price: number;
-  final_price: number;
-  currency: string;
-  large_capsule_image: string;
-  small_capsule_image: string;
-  windows_available: boolean;
-  mac_available: boolean;
-  linux_available: boolean;
-  streamingvideo_available: boolean;
-  discount_expiration: number;
-  header_image: string;
-  controller_support?: string;
-}
-
-// interface CartItem {
-//   game: Game;
-//   quantity: number;
-// }
-
-interface CartItemProps {
-  game: Game;
-}
-
-const CartItem: React.FC<CartItemProps> = ({ game }) => {
+const CartItem = ({ game }) => {
   const [quantity, setQuantity] = useState(0);
 
   const handleAddToCart = () => {
@@ -45,18 +20,35 @@ const CartItem: React.FC<CartItemProps> = ({ game }) => {
     return quantity > 0;
   };
 
+  CartItem.propTypes = {
+    game: PropTypes.object.isRequired,
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-lg">
       <img
-        src={game["Header image"]}
-        alt={game["Name"]}
+        // 'large_capsule_image, if available, otherwise 'Header image'
+        src={
+          game["large_capsule_image"]
+            ? game["large_capsule_image"]
+            : game["Header image"]
+        }
+        alt={game["name"] ? game["name"] : game["Name"]}
         className="rounded-t-lg"
       />
       <div className="p-4 flex flex-col justify-between">
         <div>
-          <h2 className="text-lg font-bold">{game["Name"]}</h2>
+          <h2 className="text-lg font-bold">
+            {game["name"] ? game["name"] : game["Name"]}
+          </h2>
           <p className="text-sm text-gray-600">
-            {game["Price"] === 0 ? "FREE" : "$" + game["Price"]}
+            {game["final_price"] !== undefined && game["final_price"] !== 0
+              ? "$" + game["final_price"] / 100
+              : (game["final_price"] === 0 ||
+                  game["final_price"] === undefined) &&
+                game["Price"] === 0
+              ? "FREE"
+              : "$" + game["Price"]}
           </p>
         </div>
         <button
@@ -74,13 +66,13 @@ const CartItem: React.FC<CartItemProps> = ({ game }) => {
   );
 };
 
-const App: React.FC = () => {
-  const [featuredGames, setFeaturedGames] = useState<Game[]>([]);
-  const [allGames, setAllGames] = useState<Game[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [cartItemCount, setCartItemCount] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+const App = () => {
+  const [featuredGames, setFeaturedGames] = useState([]);
+  const [allGames, setAllGames] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [cart, setCart] = useState([]);
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -92,14 +84,12 @@ const App: React.FC = () => {
       .get("http://localhost:3000/api/games")
       .then((response) => {
         setAllGames(response.data);
-        setIsLoading(false); // <-- Set isLoading to false
+        setIsLoading(false);
       })
       .catch((error) => console.error(error));
-
-    console.log("allGames: ", allGames);
   }, []);
 
-  const handleAddToCart = (game: Game) => {
+  const handleAddToCart = (game) => {
     const existingCartItemIndex = cart.findIndex(
       (item) => item.game.id === game.id
     );
@@ -118,7 +108,7 @@ const App: React.FC = () => {
     setCartItemCount(cartItemCount + 1);
   };
 
-  const handleRemoveFromCart = (game: Game) => {
+  const handleRemoveFromCart = (game) => {
     const existingCartItemIndex = cart.findIndex(
       (item) => item.game.id === game.id
     );
@@ -140,16 +130,17 @@ const App: React.FC = () => {
     setCartItemCount(cartItemCount - 1);
   };
 
-  const isInCart = (game: Game) => {
-    return cart.some((item) => item.game.id === game.id);
-  };
+  // const isInCart = (game) => {
+  //   return cart.some((item) => item.game.id === game.id);
+  // };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredGames = allGames.filter((game) =>
-    game.Name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredGames = allGames.filter(
+    (game) =>
+      game.Name && game.Name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -187,11 +178,10 @@ const App: React.FC = () => {
             <div className="spinner"></div>
             <p className="mt-2 text-center">Loading games...</p>
             <p className="mt-1 text-gray-400 text-sm text-center mb-32">
-              And no, you don't need to button-mash to progress.
+              And no, you don&apos;t need to button-mash to progress.
             </p>
           </div>
-        )}
-
+        )}{" "}
         <div className="h-70vh overflow-y-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {featuredGames.map((game) => {
@@ -240,15 +230,12 @@ const App: React.FC = () => {
           <h2 className="text-lg font-bold mb-4">All Games</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {filteredGames.map((game) => {
-              const cartItem = cart.find((item) => item.game.id === game.id);
               const isInFeaturedGames = featuredGames.some(
                 (featuredGame) => featuredGame.id === game.id
               );
-
               if (isInFeaturedGames) {
                 return null;
               }
-
               return <CartItem key={game.id} game={game} />;
             })}
           </div>
@@ -263,7 +250,7 @@ const App: React.FC = () => {
             https://store.steampowered.com
           </a>
         </p>
-      </footer>{" "}
+      </footer>
     </div>
   );
 };
